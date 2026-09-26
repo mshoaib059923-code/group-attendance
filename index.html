@@ -3,140 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group Attendance App</title>
+    <title>Group Attendance & Shopping Status</title>
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-color: #f0f2f5;
-            padding: 15px;
-            color: #333;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        h2 {
-            text-align: center;
-            color: #075e54;
-            margin-bottom: 5px;
-        }
-        p.subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 15px;
-        }
-        input:focus, select:focus {
-            border-color: #25d366;
-            outline: none;
-        }
-        .status-options {
-            display: flex;
-            gap: 10px;
-        }
-        .status-btn {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background: #f8f9fa;
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: 600;
-        }
-        .status-btn.active {
-            background-color: #25d366;
-            color: white;
-            border-color: #25d366;
-        }
-        .submit-btn {
-            background-color: #075e54;
-            color: white;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .submit-btn:hover {
-            background-color: #054840;
-        }
-        .records-section {
-            margin-top: 25px;
-            border-top: 2px dashed #eee;
-            padding-top: 15px;
-        }
-        .records-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .export-btn {
-            background-color: #128c7e;
-            color: white;
-            padding: 6px 12px;
-            font-size: 12px;
-            width: auto;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 13px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .badge {
-            padding: 3px 6px;
-            border-radius: 4px;
-            color: white;
-            font-weight: bold;
-            font-size: 11px;
-        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f0f2f5; padding: 15px; color: #333; }
+        .container { max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 20px; }
+        h2 { text-align: center; color: #075e54; margin-bottom: 5px; }
+        p.subtitle { text-align: center; font-size: 14px; color: #666; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
+        input, select, button { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; }
+        input:focus { border-color: #25d366; outline: none; }
+        .status-options { display: flex; gap: 10px; }
+        .status-btn { flex: 1; padding: 10px; border: 1px solid #ccc; background: #f8f9fa; border-radius: 8px; cursor: pointer; text-align: center; font-weight: 600; }
+        .status-btn.active { background-color: #25d366; color: white; border-color: #25d366; }
+        .submit-btn { background-color: #075e54; color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
+        .submit-btn:hover { background-color: #054840; }
+        .records-section { margin-top: 25px; border-top: 2px dashed #eee; padding-top: 15px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .badge { padding: 3px 6px; border-radius: 4px; color: white; font-weight: bold; font-size: 11px; }
         .badge-Present { background-color: #28a745; }
         .badge-Absent { background-color: #dc3545; }
         .badge-Leave { background-color: #ffc107; color: #333; }
+        .loading { text-align: center; font-size: 12px; color: #888; margin-top: 5px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>📋 Daily Attendance</h2>
-    <p class="subtitle">Apni Haazri Darj Karein</p>
+    <h2>📋 Group Attendance</h2>
+    <p class="subtitle">Haazri aur Marriage Shopping Update</p>
 
     <form id="attendanceForm">
         <div class="form-group">
@@ -150,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            <label>Status Choose Karein:</label>
+            <label>Attendance Status:</label>
             <div class="status-options">
                 <div class="status-btn active" onclick="setStatus('Present', this)">Present</div>
                 <div class="status-btn" onclick="setStatus('Absent', this)">Absent</div>
@@ -159,101 +57,98 @@
             <input type="hidden" id="statusVal" value="Present">
         </div>
 
-        <button type="submit" class="submit-btn">Haazri Lagayein (Submit)</button>
+        <div class="form-group">
+            <label for="shoppingProgress">🛍️ Marriage Shopping Kitni Hui (%):</label>
+            <input type="text" id="shoppingProgress" placeholder="Eg. 50% ya 70% complete" required>
+        </div>
+
+        <button type="submit" class="submit-btn" id="subBtn">Submit Karein</button>
     </form>
 
     <div class="records-section">
-        <div class="records-header">
-            <h3>Aaj ki List</h3>
-            <button class="export-btn" onclick="exportToCSV()">Download Excel</button>
-        </div>
+        <h3>👥 Sabhi Members Ki List</h3>
+        <p class="loading" id="loadStatus">Loading list...</p>
         <table id="recordsTable">
             <thead>
                 <tr>
                     <th>Naam</th>
                     <th>Date</th>
                     <th>Status</th>
+                    <th>Shopping %</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Data yahan dynamically show hoga -->
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
 
 <script>
-    // Set today's date by default
+    // ⬇️ Replace with your Google Apps Script Web App URL
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwITuDV6lyrDx_PMMJd-rrSvnSrS0VLdjIhF_ZhSEGdQVfZrUYImQppr_RXZpfubpnd/exec";
+
     document.getElementById('attDate').valueAsDate = new Date();
 
-    let selectedStatus = 'Present';
-
     function setStatus(val, el) {
-        selectedStatus = val;
         document.getElementById('statusVal').value = val;
-        let btns = document.querySelectorAll('.status-btn');
-        btns.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
         el.classList.add('active');
     }
 
-    // Load existing records from LocalStorage
     document.addEventListener('DOMContentLoaded', loadRecords);
 
     document.getElementById('attendanceForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        let name = document.getElementById('memberName').value.trim();
-        let date = document.getElementById('attDate').value;
-        let status = document.getElementById('statusVal').value;
+        let btn = document.getElementById('subBtn');
+        btn.disabled = true;
+        btn.innerText = "Saving...";
 
-        if(!name) return;
+        let data = {
+            name: document.getElementById('memberName').value.trim(),
+            date: document.getElementById('attDate').value,
+            status: document.getElementById('statusVal').value,
+            shoppingProgress: document.getElementById('shoppingProgress').value.trim()
+        };
 
-        let record = { name, date, status, time: new Date().toLocaleTimeString() };
-
-        let records = JSON.parse(localStorage.getItem('group_attendance')) || [];
-        records.push(record);
-        localStorage.getItem('group_attendance');
-        localStorage.setItem('group_attendance', JSON.stringify(records));
-
-        document.getElementById('memberName').value = '';
-        loadRecords();
-        alert('Aapki attendance darj ho gayi hai!');
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(() => {
+            alert('Aapki attendance aur shopping update save ho gayi!');
+            document.getElementById('memberName').value = '';
+            document.getElementById('shoppingProgress').value = '';
+            btn.disabled = false;
+            btn.innerText = "Submit Karein";
+            setTimeout(loadRecords, 1200);
+        }).catch(err => {
+            alert('Error saving data');
+            btn.disabled = false;
+            btn.innerText = "Submit Karein";
+        });
     });
 
     function loadRecords() {
-        let records = JSON.parse(localStorage.getItem('group_attendance')) || [];
-        let tbody = document.querySelector('#recordsTable tbody');
-        tbody.innerHTML = '';
-
-        records.reverse().forEach(r => {
-            let tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${r.name}</td>
-                <td>${r.date}</td>
-                <td><span class="badge badge-${r.status}">${r.status}</span></td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
-
-    function exportToCSV() {
-        let records = JSON.parse(localStorage.getItem('group_attendance')) || [];
-        if(records.length === 0) {
-            alert('Koi record nahi hai download karne ke liye!');
-            return;
-        }
-
-        let csv = 'Naam,Date,Status,Time\n';
-        records.forEach(r => {
-            csv += `"${r.name}","${r.date}","${r.status}","${r.time}"\n`;
-        });
-
-        let blob = new Blob([csv], { type: 'text/csv' });
-        let url = window.URL.createObjectURL(blob);
-        let a = document.createElement('a');
-        a.href = url;
-        a.download = 'Attendance_Report.csv';
-        a.click();
+        document.getElementById('loadStatus').innerText = "Updating live list...";
+        fetch(SCRIPT_URL)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('loadStatus').innerText = "";
+                let tbody = document.querySelector('#recordsTable tbody');
+                tbody.innerHTML = '';
+                data.reverse().forEach(r => {
+                    let tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><b>${r.name}</b></td>
+                        <td>${r.date}</td>
+                        <td><span class="badge badge-${r.status}">${r.status}</span></td>
+                        <td>${r.shoppingProgress || 'N/A'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }).catch(() => {
+                document.getElementById('loadStatus').innerText = "";
+            });
     }
 </script>
 
